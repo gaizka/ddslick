@@ -98,7 +98,7 @@
                 else options.data = $.merge(ddSelect, options.data);
 
                 //Replace HTML select with empty placeholder, keep the original
-                var original = obj, placeholder = $('<div').attr('id', obj.attr('id') + '-dd-placeholder');
+                var original = obj, placeholder = $('<div/>').attr('id', obj.attr('id') + '-dd-placeholder');
                 obj.replaceWith(placeholder);
                 obj = placeholder;
 
@@ -159,20 +159,20 @@
 
                 //EVENTS
                 //Displaying options
-                obj.find('.dd-select').on('click.ddslick', function () {
+                obj.find('.dd-select').bind('click.ddslick', function () {
                     open(obj);
                 });
 
                 //Selecting an option
-                obj.find('.dd-option').on('click.ddslick', function () {
+                obj.find('.dd-option').bind('click.ddslick', function () {
                     selectIndex(obj, $(this).closest('li').index());
                 });
 
                 //Click anywhere to close
                 if (options.clickOffToClose) {
                     ddOptions.addClass('dd-click-off-close');
-                    obj.on('click.ddslick', function (e) { e.stopPropagation(); });
-                    $('body').on('click', function () {
+                    obj.bind('click.ddslick', function (e) { e.stopPropagation(); });
+                    $('body').bind('click', function () {
                     $('.dd-open').removeClass('dd-open');
                         $('.dd-click-off-close').slideUp(50).siblings('.dd-select').find('.dd-pointer').removeClass('dd-pointer-up');
                     });
